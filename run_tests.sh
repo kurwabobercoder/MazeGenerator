@@ -14,14 +14,14 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-echo "--- Running 2000 tests ---"
+echo "--- Running 20000 tests ---"
 passed_count=0
 failed_count=0
 timeout_count=0
 runtime_error_count=0
 
 
-for i in {1..1000}; do
+for i in {1..20000}; do
     size=$(( RANDOM % 466 + 5 ))
 
     temp_maze_output=$(mktemp)

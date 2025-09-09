@@ -2,6 +2,14 @@
 #include <random>
 #include <vector>
 
+std::pair<int, int> get_coordinates(int type, int index, int size) {
+	if (type == 1) return {0, index};
+	if (type == 2) return {index, 0};
+	if (type == 3) return {index, size - 1};
+	if (type == 4) return {size - 1, index};
+	return {-1, -1};
+}
+
 int main() {
 	int size = 0;
 	std::cin >> size;
@@ -27,10 +35,19 @@ int main() {
 	int firstExitIndex = distribExitIndex(gen);
 	int secondExitType, secondExitIndex;
 
+	std::pair<int, int> first_exit_coords;
+	std::pair<int, int> second_exit_coords;
+
 	do {
+		firstExitType = distribExits(gen);
+		firstExitIndex = distribExitIndex(gen);
+		first_exit_coords = get_coordinates(firstExitType, firstExitIndex, size);
+
 		secondExitType = distribExits(gen);
 		secondExitIndex = distribExitIndex(gen);
-	} while (firstExitType == secondExitType && firstExitIndex == secondExitIndex);
+		second_exit_coords = get_coordinates(secondExitType, secondExitIndex, size);
+
+	} while (first_exit_coords == second_exit_coords);
 
 	std::cout << size << std::endl;
 
